@@ -1,0 +1,29 @@
+<div class="columns">
+  <div class="measures column" *ngFor="let alert of alertLevels; let i = index">
+    <H3 style="text-transform: capitalize;">{{alert}}</H3>
+    <button mat-icon-button #tooltipMeasures="matTooltip"
+           [matTooltip]="'Zde je možné si nadefinovat vlastní opatření, v závislosti na aktuální ' +
+            'úrovni varování. Tato opatření budou zobrazena na hlavní straně ve chvíli kdy ' +
+             'kdy je daný stupeň platný. '"
+           matTooltipPosition="above"
+           (click)="tooltipMeasures.toggle()">
+      <mat-icon class="info-icon">help_outline</mat-icon>
+    </button>
+
+    <mat-form-field class="chip-list" appearance="outline">
+      <mat-chip-list #chipListEasy aria-label="Plánovaná opatření">
+        <mat-chip *ngFor="let measure of userConfigService.getUserConfig().measures[i]" [selectable]="selectable"
+                  [removable]="removable" (removed)="remove(measure, i)">
+          {{measure}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="Přidejte opatření..."
+               [matChipInputFor]="chipListEasy"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               [matChipInputAddOnBlur]="addOnBlur"
+               (matChipInputTokenEnd)="add($event, i)">
+      </mat-chip-list>
+    </mat-form-field>
+  </div>
+</div>
+

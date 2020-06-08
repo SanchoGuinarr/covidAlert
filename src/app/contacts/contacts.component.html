@@ -1,0 +1,24 @@
+<div class="columns">
+  <div class="column" *ngFor="let cluster of contactsClusters.getClustersArray()">
+<mat-accordion  multi>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{contactsClusters.getClusterCaption(cluster)}}
+      </mat-panel-title>
+      <mat-panel-description>
+
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-list>
+      <mat-list-item *ngFor="let contact of contactsClusters.getCluster(cluster) | keyvalue">
+        <mat-icon mat-list-icon>person</mat-icon>
+        {{contact.value.name}}
+        <button mat-icon-button (click)="edit(contact.value.id)"><mat-icon>edit</mat-icon></button>
+      </mat-list-item>
+    </mat-list>
+    <button mat-raised-button color="primary" (click)="add(cluster)"><mat-icon>new</mat-icon>Nový</button>
+  </mat-expansion-panel>
+</mat-accordion>
+</div>
+</div>

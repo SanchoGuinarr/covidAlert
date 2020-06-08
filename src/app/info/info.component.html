@@ -1,0 +1,36 @@
+<div class="center-container">
+  <div>
+    <mat-card>
+      <p>
+        V této fázi je to jen velmi jednoduchý návrh, mám to hlavně pro sebe. Pokud Vám to přijde dobrý, dejte mi vědět,
+        možná mě to motivuje k dalšímu vývoji. Je tam spousta věcí na vylepšování.
+      </p>
+      <p>
+        Inspirováno <a
+        href="https://uniteforrecovery.govt.nz/covid-19/covid-19-alert-system/alert-system-overview/">Novým Zélandem</a>
+        Chybělo mi jednoduché číslo, pro rychlé rozhodování, bez nutnosti podrobně studovat aktuální vývoj.
+      </p>
+
+
+        <div *ngFor="let caption of ALERT.captions; let i = index">
+          <mat-icon [ngClass]="['alert-icon', ALERT.classes[i]]">warning</mat-icon>
+          <span class="level">{{caption}}</span>
+        </div>
+
+      <p>
+        Úroveň varování závisí na dvou číslech: Reprodukčním čísle a aktuálním počtu nakažených. Podrobnosti výpočtu
+        doplním.
+        Aplikace zároveň slouží k velmi jedoduchému záznamu kontaktů. Na zakladě množství kontaktů a aktivit v předchozích
+        dnech potom v závislosti na úrovni varování navrhuje úroveň setkávání. Vycházím z předpokladu, že je zásadní
+        snížit pravděpodobnost toho, že budu přenašečem, ale zároveň nechci úplně omezit své množství kontaktů.
+        Čím více kontaktů v minulých dnech, tim méně bych se měl setkávat s dalšími lidmi. Čím starší kontakty jsou, tím
+        je riziko menší, protože předpokládám, že by se u mě, nebo u lidí, se kterými jsem se setkal, projevily příznaky.
+      </p>
+      <h4>Osobní data</h4>
+      <p>
+        Veškerá data jsou ukládána pouze do prohlížeče (aplikace nemá backend). V případě, že aplikaci otevřete v jiném
+        prohlížeči nebo v anonymním okně, o všechna data přijdete. Žádná data se nikam neposílají.
+      </p>
+    </mat-card>
+  </div>
+</div>

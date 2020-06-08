@@ -1,0 +1,39 @@
+.alert-icon{
+  font-size: 200px;
+  width: 200px;
+  height: 200px;
+}
+
+mat-chip {
+  max-width: 400px;
+}
+
+.alert-text{
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.dashboard-container{
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-card{
+ max-width: 400px;
+}
+
+.info{
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.info-line{
+  margin-bottom: 5px;
+}
+
+.data{
+  font-weight: bold;
+}
+
+
+

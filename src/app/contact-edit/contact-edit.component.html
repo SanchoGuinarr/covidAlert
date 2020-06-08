@@ -1,0 +1,70 @@
+<div class="center-container">
+  <mat-card class="edit-card">
+    <mat-card-header>
+      <mat-card-title>
+        Kontakt
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form *ngIf="form" [formGroup]="form">
+        <p>
+          <mat-form-field appearance="standard">
+            <mat-label>Jméno</mat-label>
+            <input matInput formControlName="name">
+          </mat-form-field>
+        </p>
+        <div class="form-label">Riziko
+          <button mat-icon-button #tooltipRisk="matTooltip"
+                  [matTooltip]="'Úroveň rizika, které setkání s danou osobou představuje. ' +
+            'Na jeho základě je vypočteno dopručení na setkávání s dalšími lidmy. '"
+                  matTooltipPosition="above"
+                  (click)="tooltipRisk.toggle()">
+            <mat-icon class="info-icon">help_outline</mat-icon>
+          </button>
+        </div>
+        <div class="center-container-radio">
+          <span class="radio-scale">nízké</span>
+          <mat-radio-group formControlName="risk">
+            <mat-radio-button [value]="1"></mat-radio-button>
+            <mat-radio-button [value]="2"></mat-radio-button>
+            <mat-radio-button [value]="3"></mat-radio-button>
+            <mat-radio-button [value]="4"></mat-radio-button>
+            <mat-radio-button [value]="5"></mat-radio-button>
+          </mat-radio-group>
+          <span class="radio-scale">vysoké</span>
+        </div>
+        <div class="form-label">Zranitelnost
+          <button mat-icon-button #tooltipVulnerability="matTooltip"
+                  [matTooltip]="'Úroveň zranitelnosti dané osoby. aktuálně se k ničemu nevyužívá. '"
+                  matTooltipPosition="above"
+                  (click)="tooltipVulnerability.toggle()">
+            <mat-icon class="info-icon">help_outline</mat-icon>
+          </button>
+        </div>
+        <div>
+          <div class="center-container-radio">
+          <span class="radio-scale">nízká</span>
+          <mat-radio-group formControlName="vulnerability">
+            <mat-radio-button [value]="1"></mat-radio-button>
+            <mat-radio-button [value]="2"></mat-radio-button>
+            <mat-radio-button [value]="3"></mat-radio-button>
+            <mat-radio-button [value]="4"></mat-radio-button>
+            <mat-radio-button [value]="5"></mat-radio-button>
+          </mat-radio-group>
+          <span class="radio-scale">vysoká</span>
+          </div>
+        </div>
+        <div class="form-label" id="radio-group-label">Cluster</div>
+        <mat-radio-group class="radio-group" formControlName="cluster">
+          <div *ngFor="let cluster of contactsClusters.getClustersArray()">
+            <mat-radio-button class="radio-button" [value]="cluster">{{contactsClusters.getClusterCaption(cluster)}}
+            </mat-radio-button>
+          </div>
+        </mat-radio-group>
+
+      </form>
+      <button mat-raised-button color="accent" routerLink="/contacts">Zpět</button>
+      <button mat-raised-button color="primary" (click)="save()">Uložit</button>
+    </mat-card-content>
+  </mat-card>
+</div>

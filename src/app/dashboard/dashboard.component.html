@@ -1,0 +1,70 @@
+<div class="center-container" *ngIf="alert">
+  <mat-card class="dashboard-card">
+    <mat-card-header>
+      <mat-card-title [ngClass]="['alert-text',alert.class]">
+        Úroveň {{alert.level + 1}} - {{alert.caption}}
+        <button mat-icon-button #tooltipAlert="matTooltip"
+                [matTooltip]="'Aktuální úroveň varování v ČR v pětistupňové škále. Založené na indexu vypočteného z reprodukčního čísla' +
+                 'a počtu nakažených osob. Aktuální hodnota indexu: '+ alert.alertNumber"
+                matTooltipPosition="above"
+                (click)="tooltipAlert.toggle()"
+        >
+          <mat-icon class="info-icon">help_outline</mat-icon>
+        </button>
+      </mat-card-title>
+    </mat-card-header>
+    <div class="dashboard-container">
+      <mat-icon [ngClass]="['alert-icon', alert.class]">warning</mat-icon>
+    </div>
+    <mat-card-content>
+
+      <!--    <div>Index: {{alert.alertNumber}}</div>-->
+      <div class="info">
+        <div class="info-line">Reprodukční číslo: <span class="data">{{actualData.reproductionNumber}}</span>
+          <button mat-icon-button #tooltipR="matTooltip"
+                  [matTooltip]="'Aktuální reprodukční číslo v ČR.'"
+                  matTooltipPosition="above"
+                  (click)="tooltipR.toggle()"
+          >
+            <mat-icon class="info-icon">help_outline</mat-icon>
+          </button>
+        </div>
+        <div class="info-line">Aktuální počet nakažených: <span class="data">{{actualData.actualCases}}</span>
+          <button mat-icon-button #tooltipCases="matTooltip"
+                  [matTooltip]="'Aktuální počet nakažených osob v ČR.'"
+                  matTooltipPosition="above"
+                  (click)="tooltipCases.toggle()"
+          >
+            <mat-icon class="info-icon">help_outline</mat-icon>
+          </button>
+        </div>
+        <div class="info-line">Setkávání: <span class="data">{{meetMessage}}</span>
+          <button mat-icon-button #tooltipMeet="matTooltip"
+                  [matTooltip]="'Doporučení pro setkávání s ostatními lidmi, založené na indexu vypočteném na základě' +
+                   ' kontaktů v předchozích dnech. Aktuální hodnota indexu: '+meetIndex"
+                  matTooltipPosition="above"
+                  (click)="tooltipMeet.toggle()"
+                  >
+            <mat-icon class="info-icon">help_outline</mat-icon>
+          </button>
+        </div>
+
+        <div class="info-line">Opatření:
+          <button mat-icon-button #tooltipMeasures="matTooltip"
+                  [matTooltip]="'Opatření, definovaná uživetelem, které by se měli aplikavat při této úrovni varování.'"
+                  matTooltipPosition="above"
+                  (click)="tooltipMeasures.toggle()"
+          >
+            <mat-icon class="info-icon">help_outline</mat-icon>
+          </button>
+        </div>
+      </div>
+      <mat-chip-list class="mat-chip-list-stacked">
+        <mat-chip *ngFor="let activity of userConfigService.getMeasuresForLevel(alert.level)" color="primary">
+          {{activity}}
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+  </mat-card>
+</div>
+

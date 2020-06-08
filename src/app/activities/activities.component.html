@@ -1,0 +1,84 @@
+<div class="columns">
+  <div class="column">
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Obecné aktivity
+          </mat-panel-title>
+          <mat-panel-description>
+<!--            <button mat-icon-button #tooltipActivity="matTooltip"-->
+<!--                    [matTooltip]="'Zaškrtněnte, pokud se týká daného dne.'"-->
+<!--                    matTooltipPosition="above"-->
+<!--                    (click)="tooltipActivity.toggle()">-->
+<!--              <mat-icon class="info-icon">help_outline</mat-icon>-->
+<!--            </button>-->
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <table mat-table [dataSource]="activitiesData">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef class="activities-header-name"> Název</th>
+            <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+          </ng-container>
+
+          <ng-container *ngFor="let date of dates" [matColumnDef]="date.caption">
+            <th mat-header-cell *matHeaderCellDef>
+              <div class="activities-header">{{date.caption}}</div>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-checkbox (change)="selectActivity(element.id, date.date, $event.checked)"
+                            [checked]="element[date.caption]">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="column" *ngFor="let cluster of contactsClusters.getClustersArray()">
+    <mat-accordion class="example-headers-align" multi>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{contactsClusters.getClusterCaption(cluster)}}
+          </mat-panel-title>
+          <mat-panel-description>
+<!--            <button mat-icon-button #tooltipPersons="matTooltip"-->
+<!--                    [matTooltip]="'Zašktněte pokud daný den došlo k setkání s osobou a pokud toto setkání mohlo vést k pravděpodobnému přenosu viru ' +-->
+<!--               ' (bezprostřední kontakt, více jak 15 minut v blízkosti).'"-->
+<!--                    matTooltipPosition="above"-->
+<!--                    (click)="tooltipPersons.toggle()">-->
+<!--              <mat-icon class="info-icon">help_outline</mat-icon>-->
+<!--            </button>-->
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <table mat-table [dataSource]="data[cluster]">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef class="activities-header-name"> Jméno</th>
+            <td mat-cell *ngIf="cluster === CLUSTER.work" class="lead-event"> V práci</td>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <ng-container *ngFor="let date of dates" [matColumnDef]="date.caption">
+            <th mat-header-cell *matHeaderCellDef>
+              <div class="activities-header">{{date.caption}}</div>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-checkbox (change)="select(element.id, date.date, $event.checked)"
+                            [checked]="element[date.caption]">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>
