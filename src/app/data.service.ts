@@ -54,7 +54,7 @@ export class DataService {
     if(this.casesDataSubscription === null) {
       this.casesDataSubscription = this.http.get('https://onemocneni-aktualne.mzcr.cz/api/v1/covid-19/nakazeni-vyleceni-umrti-testy.min.json');
     }
-    
+
     if(this.joinSubscription === null){
       this.joinSubscription = forkJoin(this.reproductionNumberDataSubscription, this.casesDataSubscription).pipe(map(
         results => {
