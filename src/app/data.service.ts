@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {IActualData} from "./_models/IActualData";
 import {forkJoin, Observable, of} from "rxjs";
 import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs/operators";
+import {map, share} from "rxjs/operators";
 import {Alert} from "./_classes/Alert";
 import {UserConfigService} from "./user-config.service";
 
@@ -56,7 +56,7 @@ export class DataService {
     }
 
     if(this.joinSubscription === null){
-      this.joinSubscription = forkJoin(this.reproductionNumberDataSubscription, this.casesDataSubscription).pipe(map(
+      this.joinSubscription = forkJoin(this.reproductionNumberDataSubscription, this.casesDataSubscription).pipe(share(),map(
         results => {
           if (results[0] && results[0].data && results[0].data[0]
             && results[1].data) {
